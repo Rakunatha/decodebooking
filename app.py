@@ -213,6 +213,14 @@ transition:background .2s,color .2s,transform .2s var(--ease)}
 .row{display:flex;flex-wrap:wrap;gap:var(--s1)}.grid{display:grid;gap:var(--s2);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .toast{position:fixed;left:50%;bottom:var(--s3);transform:translate(-50%,120px);background:var(--ink);color:#fff;
 padding:14px 24px;border-radius:999px;transition:transform .4s var(--ease);z-index:20}.toast.show{transform:translate(-50%,0)}
+html{-webkit-text-size-adjust:100%}body{overflow-x:hidden}img,svg,input,select,textarea{max-width:100%}
+input[type=date]{min-width:0;-webkit-appearance:none;appearance:none;min-height:56px}
+.toast{max-width:calc(100vw - 32px);text-align:center;border-radius:20px}
+@media(max-width:640px){
+ :root{--s3:20px;--s4:32px;--s5:48px;--s6:64px}
+ .wrap{padding:0 20px}h2{font-size:clamp(1.8rem,8.5vw,2.4rem)}
+ p.lead{font-size:1.02rem}.btn{padding:14px 22px}.chip{padding:10px 14px;font-size:.92rem}
+ .field{padding:15px 16px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 """
 
@@ -237,6 +245,16 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
 .bar.show{transform:none}.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding:var(--s2) var(--s3);gap:var(--s2)}
 .bar .t{font:600 1.8rem 'Oswald'}.done{text-align:center;padding:var(--s6) 0;display:none}.done h2{margin:var(--s2) 0}
 .tint{background:var(--tint)}.tint .svc{background:var(--paper)}.tint .svc.on{background:var(--ink)}
+.hero h1{font-size:clamp(2.3rem,10vw,8rem)}
+@media(max-width:640px){
+ nav{gap:var(--s2)}nav b{font-size:1rem;line-height:1.15;min-width:0}nav .btn{padding:10px 16px;font-size:.9rem;white-space:nowrap}
+ .hero{min-height:calc(100svh - 80px);padding:var(--s4) 0;gap:var(--s2)}
+ .svc{grid-template-columns:1fr;padding:20px}.svc .p{grid-row:auto;order:2}.svc:hover{transform:none}
+ .slot{min-width:0;flex:1 0 calc(33.333% - 8px);text-align:center}
+ .bar .wrap{padding:12px 20px calc(12px + env(safe-area-inset-bottom));gap:12px}.bar .t{font-size:1.4rem}
+ #sum{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ #jump{padding:12px 18px;white-space:nowrap}#submit{width:100%}
+ footer.wrap{padding-bottom:150px!important;font-size:.85rem}.done h1{font-size:clamp(2.2rem,12vw,4rem)}}
 </style></head><body>
 <div class="wrap"><nav><b>DECODE <span style="color:var(--red)">DETAILING STUDIO</span></b><a href="#book" class="btn ghost" style="text-decoration:none">Book now</a></nav>
 <header class="hero"><h1><span>Where others wash,</span><span>we decode the detail.</span></h1>
@@ -314,6 +332,14 @@ grid-template-columns:110px 1fr auto;gap:var(--s2) var(--s3);align-items:center;
 .login{min-height:100vh;display:grid;place-content:center;gap:var(--s2);width:min(360px,90vw);margin:0 auto}
 .filters{display:flex;flex-wrap:wrap;gap:var(--s1);align-items:center;margin-bottom:var(--s2)}.empty{padding:var(--s5) 0;text-align:center}
 @media(max-width:640px){.bk{grid-template-columns:1fr}}
+.top{flex-wrap:wrap;gap:var(--s2)}.filters .field{min-width:0}
+@media(max-width:640px){
+ .top{padding:var(--s3) 0 var(--s2)}.top .row{width:100%}.top .btn{flex:1;text-align:center}
+ .stats{grid-template-columns:1fr 1fr;gap:12px}.stat{padding:16px}.stat b{font-size:2rem;overflow-wrap:anywhere}
+ .bk{grid-template-columns:1fr;padding:20px;gap:12px}.bk .sel{width:100%;padding:14px}
+ .bk>div:last-child{display:flex;align-items:center}.filters{gap:8px}#fd{flex:1 1 100%}
+ #fs{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;-webkit-overflow-scrolling:touch}#fs .chip{flex:none}
+ .login h1{font-size:2.6rem}}
 </style></head><body>
 <div class="login" id="login"><h1 style="font-size:3.5rem">Studio dashboard</h1><input class="field" type="password" id="pw" placeholder="Password">
 <p class="muted" id="lerr" style="color:var(--red);min-height:1.6em"></p><button class="btn" id="go">Sign in</button></div>
