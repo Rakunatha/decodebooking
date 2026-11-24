@@ -231,7 +231,7 @@ HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=
 
 BOOKING = HEAD % "Book a detail | Decode Detailing Studio" + r"""
 <style>
-.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;gap:var(--s3);padding:var(--s5) 0}
+.hero{min-height:calc(100vh - 100px);min-height:calc(100svh - 100px);display:flex;flex-direction:column;justify-content:center;gap:var(--s3);padding:var(--s4) 0}
 .hero h1 span{display:block;animation:rise 1s var(--ease) both}.hero h1 span:nth-child(2){color:var(--red);animation-delay:.12s}
 .hero>*:not(h1){animation:rise 1s .3s var(--ease) both}@keyframes rise{from{opacity:0;transform:translateY(28px)}}
 nav{display:flex;justify-content:space-between;align-items:center;padding:var(--s3) 0}nav b{font:600 1.3rem 'Oswald';letter-spacing:.04em}
@@ -245,7 +245,14 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
 .bar.show{transform:none}.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding:var(--s2) var(--s3);gap:var(--s2)}
 .bar .t{font:600 1.8rem 'Oswald'}.done{text-align:center;padding:var(--s6) 0;display:none}.done h2{margin:var(--s2) 0}
 .tint{background:var(--tint)}.tint .svc{background:var(--paper)}.tint .svc.on{background:var(--ink)}
-.hero h1{font-size:clamp(2.3rem,10vw,8rem)}
+.done{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:calc(100vh - 120px);padding:var(--s5) 20px;animation:rise .8s var(--ease) both}
+.done h1{font-size:clamp(2.4rem,9vw,5.5rem)}
+.tick circle{stroke-dasharray:151;stroke-dashoffset:151;animation:draw .8s .1s var(--ease) forwards}
+.tick path{stroke-dasharray:40;stroke-dashoffset:40;animation:draw .5s .7s var(--ease) forwards}@keyframes draw{to{stroke-dashoffset:0}}
+.sumcard{background:var(--tint);border-radius:var(--r);padding:var(--s2) var(--s3);width:100%;max-width:520px;margin-top:var(--s4);text-align:left}
+.sumcard>div{display:flex;justify-content:space-between;gap:var(--s2);padding:10px 0}.sumcard>div span:first-child{color:var(--slate)}
+.sumcard>div span:last-child{font-weight:600;text-align:right}.sumcard .tot span{font:600 1.5rem 'Oswald'!important;color:var(--ink)!important}
+.hero h1{font-size:clamp(2.3rem,min(9vw,13vh),6.5rem)}
 @media(max-width:640px){
  nav{gap:var(--s2)}nav b{font-size:1rem;line-height:1.15;min-width:0}nav .btn{padding:10px 16px;font-size:.9rem;white-space:nowrap}
  .hero{min-height:calc(100vh - 80px);min-height:calc(100svh - 80px);padding:var(--s4) 0;gap:var(--s2)}
@@ -256,7 +263,7 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
  #jump{padding:12px 18px;white-space:nowrap}#submit{width:100%}
  footer.wrap{padding-bottom:150px!important;font-size:.85rem}.done h1{font-size:clamp(2.2rem,12vw,4rem)}}
 </style></head><body>
-<div class="wrap"><nav><b>DECODE <span style="color:var(--red)">DETAILING STUDIO</span></b><a href="#book" class="btn ghost" style="text-decoration:none">Book now</a></nav>
+<div id="site"><div class="wrap"><nav><b>DECODE <span style="color:var(--red)">DETAILING STUDIO</span></b><a href="#book" class="btn ghost" style="text-decoration:none">Book now</a></nav>
 <header class="hero"><h1><span>Where others wash,</span><span>we decode the detail.</span></h1>
 <p class="lead">Treated-water hand washes, paint correction and graphene coatings, by appointment in Nolambur, Chennai.</p>
 <div><a class="btn" href="#book" style="text-decoration:none;display:inline-block">Choose a service</a></div></header></div>
@@ -275,11 +282,13 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
 <input class="field" id="email" placeholder="Email (optional)" autocomplete="email"><input class="field" id="model" placeholder="Car make and model"></div>
 <textarea class="field" id="notes" rows="3" placeholder="Anything we should know? Scratches, stains, odours." style="margin-top:var(--s2)"></textarea>
 <p class="muted" id="err" style="color:var(--red);margin-top:var(--s2);min-height:1.6em"></p>
-<button class="btn" id="submit" style="margin-top:var(--s2)">Confirm booking</button></div></section></main>
-
-<section class="done wrap" id="done"><p class="muted">Booking reference</p><h1 id="ref" style="color:var(--red)"></h1>
-<h2>See you at the studio.</h2><p class="lead" id="doneMsg" style="margin:0 auto"></p>
-<button class="btn ghost" style="margin-top:var(--s4)" onclick="location.reload()">Book another car</button></section>
+<button class="btn" id="submit" style="margin-top:var(--s2)">Confirm booking</button></div></section></main></div>
+<section class="done wrap" id="done" aria-live="polite">
+<svg class="tick" viewBox="0 0 52 52" width="72" height="72" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="#C8202F" stroke-width="3"/><path d="M15 27l8 8 14-16" fill="none" stroke="#C8202F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<p class="muted" style="margin-top:var(--s3)">Booking confirmed</p><h1 id="thanks"></h1>
+<p class="lead" id="doneMsg" style="margin-top:var(--s2)"></p><div class="sumcard" id="sumcard"></div>
+<div class="row" style="justify-content:center;margin-top:var(--s4)"><button class="btn" id="again" type="button">Book another car</button>
+<a class="btn ghost" href="tel:+919787332633" style="text-decoration:none;display:inline-flex;align-items:center">Call the studio</a></div></section>
 <footer class="wrap muted" style="padding-bottom:140px">No. 22, Bypass Service Rd, Nolambur, Chennai 95 &nbsp; +91 97873 32633 &nbsp; decodedetailingstudio@gmail.com</footer>
 <div class="bar" id="bar"><div class="wrap"><div><div class="muted" id="sum" style="color:#b8bec7"></div><div class="t" id="total"></div></div>
 <button class="btn" id="jump" type="button">Continue</button></div></div><div class="toast" id="toast"></div>
@@ -314,8 +323,18 @@ $('#submit').onclick=async()=>{
  const r=await fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();
  b.textContent='Confirm booking';
  if(!r.ok){$('#err').textContent=d.error;b.disabled=false;if(r.status===409)loadSlots();return}
- $('#flow').style.display=$('#bar').style.display='none';$('#done').style.display='block';$('#ref').textContent=d.ref;
- $('#doneMsg').textContent=`${S.svc.name} on ${S.date} at ${S.time}. Total ${inr(d.total)}${d.gst?' plus GST':''}, payable at the studio. We will call to confirm.`;scrollTo({top:0,behavior:'smooth'})};
+ showDone(d,body)};
+function showDone(d,b){
+ $('#site').style.display=$('#bar').style.display='none';
+ const rows=[['Reference',d.ref],['Service',S.svc.name],['Vehicle',C.vehicles[S.veh]+(b.vehicle_model?', '+b.vehicle_model:'')]];
+ if(S.adds.size)rows.push(['Add-ons',[...S.adds].map(id=>C.addons.find(x=>x.id===id).name).join(', ')]);
+ rows.push(['When',new Date(S.date+'T00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long'})+', '+S.time]);
+ rows.push(['Total',inr(d.total)+(d.gst?' + GST':'')]);
+ $('#sumcard').replaceChildren(...rows.map(([k,v],i)=>{const r=el('div',i===rows.length-1?'tot':''),a=el('span'),c=el('span');a.textContent=k;c.textContent=v;r.append(a,c);return r}));
+ $('#thanks').textContent='Thank you, '+b.name.trim().split(' ')[0]+'.';
+ $('#doneMsg').textContent='We will call you on '+b.phone+' to confirm. Payment is made at the studio.';
+ $('#done').style.display='flex';document.title='Booking confirmed | Decode Detailing Studio';scrollTo(0,0)}
+$('#again').onclick=()=>{location.href='/'};
 const STEPS=['book','car','time','details'];
 const at=()=>{let k=0;STEPS.forEach((id,i)=>{if($('#'+id).getBoundingClientRect().top<=innerHeight*.45)k=i});return k};
 const label=()=>{$('#jump').textContent=at()===3?'Confirm booking':'Continue'};
