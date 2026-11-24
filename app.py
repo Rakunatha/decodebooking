@@ -10,6 +10,8 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-change-me")
 ADMIN_PASSWORD = os.environ.get("DASHBOARD_PASSWORD", "decode123")
 DB = os.environ.get("DB_PATH", os.path.join(os.path.dirname(__file__), "decode.db"))
+if not os.path.isdir(os.path.dirname(DB)):  # e.g. DB_PATH set but no disk attached: fall back to a local file
+    DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "decode.db")
 BAYS = 2  # cars per hourly slot
 SLOTS = [f"{h:02d}:00" for h in range(9, 18)]
 STATUSES = ["pending", "confirmed", "in progress", "completed", "cancelled"]
