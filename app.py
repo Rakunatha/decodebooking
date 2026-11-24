@@ -201,19 +201,19 @@ p.lead{font-size:1.15rem;color:var(--slate);max-width:46ch}.muted{color:var(--sl
 button,input,textarea,select{font:inherit;color:inherit}
 .btn{border:0;cursor:pointer;background:var(--red);color:#fff;font-weight:600;padding:14px 28px;border-radius:999px;
 transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px var(--red)}.btn:active{transform:scale(.97)}
+@media(hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px var(--red)}}.btn:active{transform:scale(.97)}
 .btn.ghost{background:var(--tint);color:var(--ink)}.btn.ghost:hover{box-shadow:none;background:#e5e7ea}
 .btn:disabled{opacity:.4;pointer-events:none}
 :focus-visible{outline:2px solid var(--red);outline-offset:3px}
 .chip{border:0;cursor:pointer;background:var(--tint);padding:10px 18px;border-radius:999px;font-weight:500;
 transition:background .2s,color .2s,transform .2s var(--ease)}
-.chip:hover{transform:translateY(-1px)}.chip.on{background:var(--ink);color:#fff}
+@media(hover:hover){.chip:hover{transform:translateY(-1px)}}.chip.on{background:var(--ink);color:#fff}
 .field{width:100%;border:0;background:var(--tint);padding:16px 18px;border-radius:var(--r);transition:background .2s,box-shadow .2s}
 .field:focus{outline:0;background:#fff;box-shadow:0 0 0 2px var(--red)}
 .row{display:flex;flex-wrap:wrap;gap:var(--s1)}.grid{display:grid;gap:var(--s2);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .toast{position:fixed;left:50%;bottom:var(--s3);transform:translate(-50%,120px);background:var(--ink);color:#fff;
 padding:14px 24px;border-radius:999px;transition:transform .4s var(--ease);z-index:20}.toast.show{transform:translate(-50%,0)}
-html{-webkit-text-size-adjust:100%}body{overflow-x:hidden}img,svg,input,select,textarea{max-width:100%}
+html{-webkit-text-size-adjust:100%;color-scheme:light}body{-webkit-tap-highlight-color:transparent}.chip,.btn{min-height:44px}body{overflow-x:hidden}img,svg,input,select,textarea{max-width:100%}
 input[type=date]{min-width:0;-webkit-appearance:none;appearance:none;min-height:56px}
 .toast{max-width:calc(100vw - 32px);text-align:center;border-radius:20px}
 @media(max-width:640px){
@@ -224,7 +224,7 @@ input[type=date]{min-width:0;-webkit-appearance:none;appearance:none;min-height:
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 """
 
-HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#FAFBFB">
 <title>%s</title><link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Oswald:wght@600&display=swap" rel="stylesheet">
 <style>/*CSS*/</style>"""
@@ -237,7 +237,7 @@ BOOKING = HEAD % "Book a detail | Decode Detailing Studio" + r"""
 nav{display:flex;justify-content:space-between;align-items:center;padding:var(--s3) 0}nav b{font:600 1.3rem 'Oswald';letter-spacing:.04em}
 .svc{display:grid;grid-template-columns:1fr auto;gap:var(--s1) var(--s3);padding:var(--s3);border-radius:var(--r);background:var(--white);
 text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(--ease),background .25s,color .25s}
-.svc:hover{transform:translateX(6px)}.svc .p{font:600 1.5rem 'Oswald';grid-row:span 2;align-self:center}
+@media(hover:hover){.svc:hover{transform:translateX(6px)}}.svc .p{font:600 1.5rem 'Oswald';grid-row:span 2;align-self:center}
 .svc.on{background:var(--ink);color:#fff}.svc.on .muted{color:#b8bec7}.svc.on .p{color:#fff}
 .stack{display:grid;gap:var(--s1);margin-top:var(--s3)}.step{max-width:720px}.step>h2{margin-bottom:var(--s3)}
 .slot{min-width:84px}.slot:disabled{opacity:.3;text-decoration:line-through;pointer-events:none}
@@ -248,7 +248,7 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
 .hero h1{font-size:clamp(2.3rem,10vw,8rem)}
 @media(max-width:640px){
  nav{gap:var(--s2)}nav b{font-size:1rem;line-height:1.15;min-width:0}nav .btn{padding:10px 16px;font-size:.9rem;white-space:nowrap}
- .hero{min-height:calc(100svh - 80px);padding:var(--s4) 0;gap:var(--s2)}
+ .hero{min-height:calc(100vh - 80px);min-height:calc(100svh - 80px);padding:var(--s4) 0;gap:var(--s2)}
  .svc{grid-template-columns:1fr;padding:20px}.svc .p{grid-row:auto;order:2}.svc:hover{transform:none}
  .slot{min-width:0;flex:1 0 calc(33.333% - 8px);text-align:center}
  .bar .wrap{padding:12px 20px calc(12px + env(safe-area-inset-bottom));gap:12px}.bar .t{font-size:1.4rem}
@@ -264,13 +264,13 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
 <main id="flow">
 <section class="tint" id="book"><div class="wrap step"><h2>What does your car need?</h2>
 <div class="row" id="cats"></div><div class="stack" id="svcs"></div></div></section>
-<section><div class="wrap step"><h2>Tell us about the car</h2>
+<section id="car"><div class="wrap step"><h2>Tell us about the car</h2>
 <div class="row" id="veh"></div>
 <p class="muted" style="margin:var(--s4) 0 var(--s2)">Add-ons are optional and priced by vehicle size.</p><div class="row" id="adds"></div></div></section>
-<section class="tint"><div class="wrap step"><h2>Pick a time</h2>
+<section class="tint" id="time"><div class="wrap step"><h2>Pick a time</h2>
 <input class="field" type="date" id="date" style="max-width:260px;margin-bottom:var(--s3)"><div class="row" id="slots"></div>
 <p class="muted" id="slotnote" style="margin-top:var(--s2)">Choose a date to see open slots.</p></div></section>
-<section><div class="wrap step"><h2>Your details</h2><div class="grid">
+<section id="details"><div class="wrap step"><h2>Your details</h2><div class="grid">
 <input class="field" id="name" placeholder="Full name" autocomplete="name"><input class="field" id="phone" placeholder="Phone number" inputmode="tel" autocomplete="tel">
 <input class="field" id="email" placeholder="Email (optional)" autocomplete="email"><input class="field" id="model" placeholder="Car make and model"></div>
 <textarea class="field" id="notes" rows="3" placeholder="Anything we should know? Scratches, stains, odours." style="margin-top:var(--s2)"></textarea>
@@ -282,7 +282,7 @@ text-align:left;border:0;cursor:pointer;width:100%;transition:transform .3s var(
 <button class="btn ghost" style="margin-top:var(--s4)" onclick="location.reload()">Book another car</button></section>
 <footer class="wrap muted" style="padding-bottom:140px">No. 22, Bypass Service Rd, Nolambur, Chennai 95 &nbsp; +91 97873 32633 &nbsp; decodedetailingstudio@gmail.com</footer>
 <div class="bar" id="bar"><div class="wrap"><div><div class="muted" id="sum" style="color:#b8bec7"></div><div class="t" id="total"></div></div>
-<a class="btn" href="#book" id="jump" style="text-decoration:none">Continue</a></div></div><div class="toast" id="toast"></div>
+<button class="btn" id="jump" type="button">Continue</button></div></div><div class="toast" id="toast"></div>
 <script>
 const $=s=>document.querySelector(s),inr=n=>'₹'+n.toLocaleString('en-IN');
 const S={cat:'Wash',svc:null,veh:'sedan',adds:new Set(),date:'',time:''};let C;
@@ -299,7 +299,8 @@ function draw(){
  const bar=$('#bar');bar.classList.toggle('show',!!S.svc);
  if(S.svc){$('#sum').textContent=`${S.svc.name}, ${C.vehicles[S.veh]}${S.adds.size?` + ${S.adds.size} add-on`+(S.adds.size>1?'s':''):''}`;
   $('#total').textContent=inr(total())+(S.svc.gst?' + GST':'')}
- $('#submit').disabled=!(S.svc&&S.date&&S.time)}
+ $('#submit').disabled=!(S.svc&&S.date&&S.time);
+ document.querySelectorAll('.chip,.svc').forEach(e=>e.setAttribute('aria-pressed',e.classList.contains('on')))}
 async function loadSlots(){
  if(!S.date)return;S.time='';const r=await (await fetch('/api/slots?date='+S.date)).json();
  $('#slotnote').textContent=r.slots.some(s=>s.open)?'Each slot holds up to two cars.':'This day is fully booked. Try another date.';
@@ -315,7 +316,15 @@ $('#submit').onclick=async()=>{
  if(!r.ok){$('#err').textContent=d.error;b.disabled=false;if(r.status===409)loadSlots();return}
  $('#flow').style.display=$('#bar').style.display='none';$('#done').style.display='block';$('#ref').textContent=d.ref;
  $('#doneMsg').textContent=`${S.svc.name} on ${S.date} at ${S.time}. Total ${inr(d.total)}${d.gst?' plus GST':''}, payable at the studio. We will call to confirm.`;scrollTo({top:0,behavior:'smooth'})};
-init();
+const STEPS=['book','car','time','details'];
+const at=()=>{let k=0;STEPS.forEach((id,i)=>{if($('#'+id).getBoundingClientRect().top<=innerHeight*.45)k=i});return k};
+const label=()=>{$('#jump').textContent=at()===3?'Confirm booking':'Continue'};
+addEventListener('scroll',label,{passive:true});addEventListener('resize',label);
+$('#jump').onclick=()=>{const k=at(),go=id=>$('#'+id).scrollIntoView({behavior:'smooth',block:'start'});
+ if(k>=2&&!S.time){go('time');toast('Pick a time slot first');return}
+ if(k===3){$('#submit').click();return}
+ go(STEPS[k+1])};
+init().then(label);
 </script></body></html>"""
 
 DASH = HEAD % "Dashboard | Decode Detailing Studio" + r"""
