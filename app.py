@@ -401,7 +401,7 @@ async function load(){
  document.querySelectorAll('.sel').forEach(s=>s.onchange=async()=>{await post('/api/admin/bookings/'+s.dataset.id,{status:s.value},'PATCH');toast('Status updated');load()})}
 $('#go').onclick=async()=>{const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#pw').value})});
  if(r.ok){show(true);load()}else $('#lerr').textContent='Wrong password.'};
-$('#pw').onkeydown=e=>e.key==='Enter'&&$('#go').click();
+$('#pw').addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()});
 $('#out').onclick=async()=>{await post('/api/admin/logout');show(false)};
 $('#fd').onchange=e=>{F.date=e.target.value;load()};$('#all').onclick=()=>{F.date='';load()};
 api('/api/admin/stats').then(()=>{show(true);load()}).catch(()=>{});setInterval(()=>$('#app').style.display==='block'&&load(),30000);
