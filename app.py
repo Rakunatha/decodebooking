@@ -348,7 +348,7 @@ init().then(label);
 
 DASH = HEAD % "Dashboard | Decode Detailing Studio" + r"""
 <style>
-body{background:var(--tint)}.field,.chip,.btn.ghost{background:var(--white)}.field::placeholder{color:#8a9099}.top{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) 0 var(--s3)}
+body{background:var(--tint)}.field,.chip,.btn.ghost{background:var(--white)}.pwbox{position:relative}.pwbox .field{padding-right:88px}.eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--slate);font-weight:600;padding:10px 14px;min-height:44px;border-radius:999px;cursor:pointer;transition:color .2s,background .2s}.eye:hover{color:var(--ink);background:var(--tint)}.field::placeholder{color:#8a9099}.top{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) 0 var(--s3)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s2);margin-bottom:var(--s4)}
 .stat{background:var(--white);padding:var(--s3);border-radius:var(--r)}.stat b{display:block;font:600 3rem/1.1 'Oswald'}
 .stat.red{background:var(--red);color:#fff}.bk{background:var(--white);border-radius:var(--r);padding:var(--s3);display:grid;
@@ -369,7 +369,7 @@ grid-template-columns:110px 1fr auto;gap:var(--s2) var(--s3);align-items:center;
  #fs{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;-webkit-overflow-scrolling:touch}#fs .chip{flex:none}
  .login h1{font-size:2.6rem}}
 </style></head><body>
-<div class="login" id="login"><h1 style="font-size:3.5rem">Studio dashboard</h1><input class="field" type="password" id="pw" placeholder="Password" aria-label="Password" autocomplete="current-password">
+<div class="login" id="login"><h1 style="font-size:3.5rem">Studio dashboard</h1><div class="pwbox"><input class="field" type="password" id="pw" placeholder="Password" aria-label="Password" autocomplete="current-password"><button type="button" class="eye" id="eye" aria-label="Show password" aria-pressed="false">Show</button></div>
 <p class="muted" id="lerr" style="color:var(--red);min-height:1.6em"></p><button class="btn" id="go">Sign in</button></div>
 <div class="wrap" id="app" style="display:none;padding-bottom:var(--s6)">
 <div class="top"><h2>Bookings</h2><div class="row"><a class="btn ghost" href="/" style="text-decoration:none">View site</a><button class="btn ghost" id="out">Sign out</button></div></div>
@@ -402,6 +402,7 @@ async function load(){
 $('#go').onclick=async()=>{const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#pw').value})});
  if(r.ok){show(true);load()}else $('#lerr').textContent='Wrong password.'};
 $('#pw').addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()});
+$('#eye').onclick=()=>{const i=$('#pw'),on=i.type==='password',b=$('#eye');i.type=on?'text':'password';b.textContent=on?'Hide':'Show';b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',on?'Hide password':'Show password');i.focus()};
 $('#out').onclick=async()=>{await post('/api/admin/logout');show(false)};
 $('#fd').onchange=e=>{F.date=e.target.value;load()};$('#all').onclick=()=>{F.date='';load()};
 api('/api/admin/stats').then(()=>{show(true);load()}).catch(()=>{});setInterval(()=>$('#app').style.display==='block'&&load(),30000);
