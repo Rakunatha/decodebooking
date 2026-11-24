@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: decode-booking
+    runtime: python
+    plan: starter            # persistent disks need a paid plan
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DASHBOARD_PASSWORD
+        sync: false          # you enter this in the Render dashboard
+      - key: DB_PATH
+        value: /var/data/decode.db
+    disk:
+      name: decode-data
+      mountPath: /var/data
+      sizeGB: 1
