@@ -329,7 +329,7 @@ init().then(label);
 
 DASH = HEAD % "Dashboard | Decode Detailing Studio" + r"""
 <style>
-body{background:var(--tint)}.top{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) 0 var(--s3)}
+body{background:var(--tint)}.field,.chip,.btn.ghost{background:var(--white)}.field::placeholder{color:#8a9099}.top{display:flex;justify-content:space-between;align-items:center;padding:var(--s4) 0 var(--s3)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s2);margin-bottom:var(--s4)}
 .stat{background:var(--white);padding:var(--s3);border-radius:var(--r)}.stat b{display:block;font:600 3rem/1.1 'Oswald'}
 .stat.red{background:var(--red);color:#fff}.bk{background:var(--white);border-radius:var(--r);padding:var(--s3);display:grid;
@@ -350,7 +350,7 @@ grid-template-columns:110px 1fr auto;gap:var(--s2) var(--s3);align-items:center;
  #fs{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;-webkit-overflow-scrolling:touch}#fs .chip{flex:none}
  .login h1{font-size:2.6rem}}
 </style></head><body>
-<div class="login" id="login"><h1 style="font-size:3.5rem">Studio dashboard</h1><input class="field" type="password" id="pw" placeholder="Password">
+<div class="login" id="login"><h1 style="font-size:3.5rem">Studio dashboard</h1><input class="field" type="password" id="pw" placeholder="Password" aria-label="Password" autocomplete="current-password">
 <p class="muted" id="lerr" style="color:var(--red);min-height:1.6em"></p><button class="btn" id="go">Sign in</button></div>
 <div class="wrap" id="app" style="display:none;padding-bottom:var(--s6)">
 <div class="top"><h2>Bookings</h2><div class="row"><a class="btn ghost" href="/" style="text-decoration:none">View site</a><button class="btn ghost" id="out">Sign out</button></div></div>
